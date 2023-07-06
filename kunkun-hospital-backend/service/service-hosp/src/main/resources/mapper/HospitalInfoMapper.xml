@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cclu.kkgh.hosp.mapper.HospitalInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.cclu.kkgh.model.entity.hosp.HospitalInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="hospName" column="hospName" jdbcType="VARCHAR"/>
+            <result property="hospCode" column="hospCode" jdbcType="VARCHAR"/>
+            <result property="apiUrl" column="apiUrl" jdbcType="VARCHAR"/>
+            <result property="signKey" column="signKey" jdbcType="VARCHAR"/>
+            <result property="contactName" column="contactName" jdbcType="VARCHAR"/>
+            <result property="contactPhone" column="contactPhone" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="TINYINT"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,hospName,hospCode,
+        apiUrl,signKey,contactName,
+        contactPhone,status,createTime,
+        updateTime,isDelete
+    </sql>
+</mapper>
