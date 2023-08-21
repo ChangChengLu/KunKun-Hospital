@@ -1,6 +1,6 @@
 package com.cclu.kkgh.exception;
 
-import com.cclu.kkgh.result.BaseResponseCodeEnum;
+import com.cclu.kkgh.result.BaseResponseCodeEnums;
 
 /**
  * @author ChangCheng Lu
@@ -15,14 +15,14 @@ public class BusinessException extends RuntimeException {
         this.code = code;
     }
 
-    public BusinessException(BaseResponseCodeEnum baseResponseCodeEnum) {
-        super(baseResponseCodeEnum.getMessage());
-        this.code = baseResponseCodeEnum.getCode();
+    public BusinessException(BaseResponseCodeEnums baseResponseCodeEnums) {
+        super(baseResponseCodeEnums.getMessage());
+        this.code = baseResponseCodeEnums.getCode();
     }
 
-    public BusinessException(BaseResponseCodeEnum baseResponseCodeEnum, String message) {
+    public BusinessException(BaseResponseCodeEnums baseResponseCodeEnums, String message) {
         super(message);
-        this.code = baseResponseCodeEnum.getCode();
+        this.code = baseResponseCodeEnums.getCode();
     }
 
     public int getCode() {

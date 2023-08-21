@@ -36,11 +36,11 @@ public class BaseResponse<T> implements Serializable {
         this(null, null, data);
     }
 
-    public BaseResponse(BaseResponseCodeEnum baseResponseCodeEnum) {
-        this(baseResponseCodeEnum.getCode(), baseResponseCodeEnum.getMessage());
+    public BaseResponse(BaseResponseCodeEnums baseResponseCodeEnums) {
+        this(baseResponseCodeEnums.getCode(), baseResponseCodeEnums.getMessage());
     }
 
-    public BaseResponse(T data, BaseResponseCodeEnum baseResponseCodeEnum) {
-        this(baseResponseCodeEnum.getCode(), baseResponseCodeEnum.getMessage(), data);
+    public BaseResponse(T data, BaseResponseCodeEnums baseResponseCodeEnums) {
+        this(baseResponseCodeEnums.getCode(), baseResponseCodeEnums.getMessage(), data);
     }
 }

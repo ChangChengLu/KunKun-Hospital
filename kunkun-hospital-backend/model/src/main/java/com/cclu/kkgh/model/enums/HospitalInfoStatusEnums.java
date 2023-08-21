@@ -1,7 +1,7 @@
 package com.cclu.kkgh.model.enums;
 
 import com.cclu.kkgh.exception.BusinessException;
-import com.cclu.kkgh.result.BaseResponseCodeEnum;
+import com.cclu.kkgh.result.BaseResponseCodeEnums;
 import lombok.Getter;
 
 import java.util.Arrays;
@@ -34,7 +34,7 @@ public enum HospitalInfoStatusEnums {
 
     public static HospitalInfoStatusEnums getEnumByCode(Integer code) {
         if (code == null) {
-            throw new BusinessException(BaseResponseCodeEnum.PARAM_ERROR);
+            throw new BusinessException(BaseResponseCodeEnums.PARAM_ERROR);
         }
 
         HospitalInfoStatusEnums[] interfaceInfoStatusEnums = HospitalInfoStatusEnums.values();

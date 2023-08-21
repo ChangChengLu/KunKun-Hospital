@@ -12,8 +12,8 @@ import com.cclu.kkgh.model.dto.hosp.HospitalInfoQueryRequest;
 import com.cclu.kkgh.model.entity.hosp.HospitalInfo;
 import com.cclu.kkgh.model.enums.HospitalInfoStatusEnums;
 import com.cclu.kkgh.result.BaseResponse;
-import com.cclu.kkgh.result.BaseResponseCodeEnum;
-import com.cclu.kkgh.result.ResultUtil;
+import com.cclu.kkgh.result.BaseResponseCodeEnums;
+import com.cclu.kkgh.utils.ResultUtils;
 import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -37,19 +37,19 @@ public class HospitalInfoController {
     @GetMapping("/list/all")
     public BaseResponse<List<HospitalInfo>> listAllHospitalInfo() {
         List<HospitalInfo> list = hospitalInfoService.list();
-        return ResultUtil.ok(list);
+        return ResultUtils.success(list);
     }
 
     @GetMapping("/delete")
     public BaseResponse<Boolean> removeHospitalInfo(@RequestBody IdRequest idRequest) {
         boolean flag = hospitalInfoService.removeById(idRequest.getId());
-        return flag ? ResultUtil.ok() : ResultUtil.fail();
+        return flag ? ResultUtils.success() : ResultUtils.fail();
     }
 
     @PostMapping("/list/page")
     public BaseResponse<Page<HospitalInfo>> listPageHospInfo(@RequestBody HospitalInfoQueryRequest hospitalInfoQueryRequest) {
         if (hospitalInfoQueryRequest == null) {
-            throw new BusinessException(BaseResponseCodeEnum.PARAM_ERROR);
+            throw new BusinessException(BaseResponseCodeEnums.PARAM_ERROR);
         }
 
         HospitalInfo hospitalInfo = new HospitalInfo();
@@ -65,7 +65,7 @@ public class HospitalInfoController {
 
         Page<HospitalInfo> page = hospitalInfoService.page(new Page<>(current, pageSize), queryWrapper);
 
-        return ResultUtil.ok(page);
+        return ResultUtils.success(page);
     }
 
     @PostMapping("/add")
@@ -73,59 +73,59 @@ public class HospitalInfoController {
         // todo 设置签名算法
 
         boolean save = hospitalInfoService.save(hospitalInfo);
-        return save ? ResultUtil.ok() : ResultUtil.fail();
+        return save ? ResultUtils.success() : ResultUtils.fail();
     }
 
     @PostMapping("/get")
     public BaseResponse<HospitalInfo> getHospitalInfoById(@RequestBody IdRequest idRequest) {
         if (idRequest == null) {
-            throw new BusinessException(BaseResponseCodeEnum.PARAM_ERROR);
+            throw new BusinessException(BaseResponseCodeEnums.PARAM_ERROR);
         }
 
         HospitalInfo hospitalInfo = hospitalInfoService.getById(idRequest.getId());
 
-        return ResultUtil.ok(hospitalInfo);
+        return ResultUtils.success(hospitalInfo);
     }
 
     @PostMapping("/update")
     public BaseResponse<HospitalInfo> updateHospitalInfo(@RequestBody HospitalInfo hospitalInfo) {
         if (hospitalInfo == null) {
-            throw new BusinessException(BaseResponseCodeEnum.PARAM_ERROR);
+            throw new BusinessException(BaseResponseCodeEnums.PARAM_ERROR);
         }
 
         // todo 参数校验
 
         boolean flag = hospitalInfoService.updateById(hospitalInfo);
 
-        return flag ? ResultUtil.ok() : ResultUtil.fail();
+        return flag ? ResultUtils.success() : ResultUtils.fail();
     }
 
     @PostMapping("/delete/batch")
     public BaseResponse<Boolean> removeBatchHospital(List<Long> idList) {
         boolean flag = hospitalInfoService.removeByIds(idList);
 
-        return flag ? ResultUtil.ok() : ResultUtil.fail();
+        return flag ? ResultUtils.success() : ResultUtils.fail();
     }
 
     @PostMapping("/sendKey")
     public BaseResponse senSignKey(@RequestBody IdRequest idRequest) {
         if (idRequest == null) {
-            throw new BusinessException(BaseResponseCodeEnum.PARAM_ERROR);
+            throw new BusinessException(BaseResponseCodeEnums.PARAM_ERROR);
         }
         HospitalInfo hospitalInfo = hospitalInfoService.getById(idRequest.getId());
         if (hospitalInfo == null) {
-            throw new BusinessException(BaseResponseCodeEnum.PARAM_ERROR);
+            throw new BusinessException(BaseResponseCodeEnums.PARAM_ERROR);
         }
         String signKey = hospitalInfo.getSignKey();
         String hospCode = hospitalInfo.getHospCode();
         //todo 发送短信
-        return ResultUtil.ok();
+        return ResultUtils.success();
     }
 
     @PostMapping("/lock")
     public BaseResponse lockHospitalInfo(@RequestBody IdRequest idRequest) {
         if (idRequest == null) {
-            throw new BusinessException(BaseResponseCodeEnum.PARAM_ERROR);
+            throw new BusinessException(BaseResponseCodeEnums.PARAM_ERROR);
         }
         long id = idRequest.getId();
         UpdateWrapper<HospitalInfo> updateWrapper = new UpdateWrapper<>();
@@ -133,13 +133,13 @@ public class HospitalInfoController {
 
         boolean update = hospitalInfoService.update(updateWrapper);
 
-        return update ? ResultUtil.ok() : ResultUtil.fail();
+        return update ? ResultUtils.success() : ResultUtils.fail();
     }
 
     @PostMapping("/unlock")
     public BaseResponse unlockHospitalInfo(@RequestBody IdRequest idRequest) {
         if (idRequest == null) {
-            throw new BusinessException(BaseResponseCodeEnum.PARAM_ERROR);
+            throw new BusinessException(BaseResponseCodeEnums.PARAM_ERROR);
         }
         long id = idRequest.getId();
         UpdateWrapper<HospitalInfo> updateWrapper = new UpdateWrapper<>();
@@ -147,6 +147,6 @@ public class HospitalInfoController {
 
         boolean update = hospitalInfoService.update(updateWrapper);
 
-        return update ? ResultUtil.ok() : ResultUtil.fail();
+        return update ? ResultUtils.success() : ResultUtils.fail();
     }
 }

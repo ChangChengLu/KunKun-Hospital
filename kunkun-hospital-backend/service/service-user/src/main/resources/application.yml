@@ -1,0 +1,26 @@
+server:
+  port: 8202
+  servlet:
+    context-path: /api
+spring:
+  application:
+    name: service-user
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/kkgh_hosp
+    username: root
+    password: 123456
+  gson:
+    date-format: yyyy-MM-dd HH:mm:ss
+knife4j:
+  enable: true
+  openapi:
+    title: service-user
+    description: "用户管理模板"
+    version: v1.0.0
+    license: Apache 2.0
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false

@@ -11,7 +11,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/kkgh_hosp
     username: root
-    password: 123456n
+    password: 123456
   gson:
     date-format: yyyy-MM-dd HH:mm:ss
 knife4j:

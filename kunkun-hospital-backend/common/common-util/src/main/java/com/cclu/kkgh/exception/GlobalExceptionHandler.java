@@ -1,8 +1,8 @@
 package com.cclu.kkgh.exception;
 
 import com.cclu.kkgh.result.BaseResponse;
-import com.cclu.kkgh.result.BaseResponseCodeEnum;
-import com.cclu.kkgh.result.ResultUtil;
+import com.cclu.kkgh.result.BaseResponseCodeEnums;
+import com.cclu.kkgh.utils.ResultUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -18,13 +18,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     public BaseResponse<?> businessExceptionHandler(BusinessException e) {
         log.error("businessException: " + e.getMessage(), e);
-        return ResultUtil.fail(e.getCode(), e.getMessage());
+        return ResultUtils.fail(e.getCode(), e.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
     public BaseResponse<?> runtimeExceptionHandler(RuntimeException e) {
         log.error("runtimeException", e);
-        return ResultUtil.fail(e.getMessage(), BaseResponseCodeEnum.SYSTEM_ERROR);
+        return ResultUtils.fail(e.getMessage(), BaseResponseCodeEnums.SYSTEM_ERROR);
     }
 
 }
