@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
-import BasicLayout from "../layouts/AdminLayout.vue";
 import UserLogin from "../pages/login/UserLogin.vue";
 import UserRegister from "../pages/register/UserRegister.vue";
 
@@ -21,9 +20,9 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/",
-    name: "home",
-    component: BasicLayout,
+    path: "/user/manage",
+    name: "userManager",
+    component: UserRegister,
     meta: {
       isLogin: true,
     },

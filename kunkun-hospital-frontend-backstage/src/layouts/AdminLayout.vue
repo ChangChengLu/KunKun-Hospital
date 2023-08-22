@@ -2,18 +2,36 @@
   <a-layout id="components-layout-demo-custom-trigger" class="site-layout">
     <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
-        <a-menu-item key="1">
-          <user-outlined />
-          <span><router-link to="#">用户管理</router-link></span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <video-camera-outlined />
-          <span>医院管理</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <upload-outlined />
-          <span>医生管理</span>
-        </a-menu-item>
+        <a-sub-menu key="user">
+          <template #title>
+            <span>
+              <user-outlined />
+              用户管理
+            </span>
+          </template>
+          <a-menu-item key="1">添加用户</a-menu-item>
+          <a-menu-item key="2">管理用户</a-menu-item>
+        </a-sub-menu>
+        <a-sub-menu key="hospital">
+          <template #title>
+            <span>
+              <user-outlined />
+              医院管理
+            </span>
+          </template>
+          <a-menu-item key="3">添加医院</a-menu-item>
+          <a-menu-item key="4">管理医院</a-menu-item>
+        </a-sub-menu>
+        <a-sub-menu key="doctor">
+          <template #title>
+            <span>
+              <user-outlined />
+              医生管理
+            </span>
+          </template>
+          <a-menu-item key="5">添加医生</a-menu-item>
+          <a-menu-item key="6">管理医生</a-menu-item>
+        </a-sub-menu>
       </a-menu>
     </a-layout-sider>
     <a-layout>
@@ -27,10 +45,9 @@
           <menu-fold-outlined v-else class="trigger" @click="doTrigger" />
         </div>
         <div id="right">
-          <a-avatar :src="userVO.userAvatar" />
-          <my-slot />
-          <a-dropdown-button>
-            {{ userVO.userName }}
+          <a-avatar id="avatar" :src="userVO.userAvatar" />
+          <a-dropdown-button id="dropdown">
+            {{ initUserVO.userName }}
             <template #overlay>
               <a-menu @click="handleMenuClick">
                 <a-menu-item key="1">
@@ -64,8 +81,7 @@
           <a-breadcrumb-item>User</a-breadcrumb-item>
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb>
-        {{ userVO }}
-        <slot></slot>
+        <router-view />
       </a-layout-content>
       <page-footer />
     </a-layout>
@@ -84,7 +100,6 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons-vue";
 import PageFooter from "@/layouts/footer/PageFooter.vue";
-import MySlot from "@/components/MySlot.vue";
 import type { MenuProps } from "ant-design-vue";
 import {
   getUserVOByIdUsingGET,
@@ -104,20 +119,28 @@ const handleMenuClick: MenuProps["onClick"] = (e) => {
   console.log("click", e);
 };
 
+const initUserVO = {
+  userName: "user",
+  userAvatar: "#",
+};
 // eslint-disable-next-line no-undef
-const userVO = ref<API.UserVO>({});
+let userVO = ref<API.UserVO>(initUserVO);
 const loadData = async (id: number) => {
-  const res = await getUserVOByIdUsingGET(id).then((res) => {
+  try {
+    const res = await getUserVOByIdUsingGET(id);
     console.log(res);
-    userVO.value = { ...res.data };
-  });
+    console.log(initUserVO);
+    userVO.value.userName = res.userName;
+    userVO.value.userAvatar = res.userAvatar;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const doLoginOut = async () => {
-  await userLogoutUsingPOST().then(() => {
-    userVO.value = {};
-    router.push("/");
-  });
+  await userLogoutUsingPOST();
+  userVO.value = {};
+  router.push("/user/login");
 };
 
 loadData(1);
@@ -131,7 +154,21 @@ loadData(1);
 
 #right {
   float: right;
-  padding-right: 10px;
+  padding-right: 15px;
+  height: 100%;
+}
+
+#dropdown {
+  position: relative;
+  padding-left: 10px;
+  /*top: 16px;*/
+  /*right: 14px;*/
+}
+
+#avatar {
+  position: relative;
+  /*top: 17px;*/
+  /*right: 100px;*/
 }
 
 .site-layout .site-layout-background {
