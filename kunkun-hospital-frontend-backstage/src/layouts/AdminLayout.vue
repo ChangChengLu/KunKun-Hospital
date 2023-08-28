@@ -9,7 +9,7 @@
               用户管理
             </span>
           </template>
-          <a-menu-item key="1">添加用户</a-menu-item>
+          <a-menu-item key="1" @click="handleMenuClick">添加用户</a-menu-item>
           <a-menu-item key="2">管理用户</a-menu-item>
         </a-sub-menu>
         <a-sub-menu key="hospital">
@@ -81,7 +81,7 @@
           <a-breadcrumb-item>User</a-breadcrumb-item>
           <a-breadcrumb-item>Bill</a-breadcrumb-item>
         </a-breadcrumb>
-        <router-view />
+        <slot></slot>
       </a-layout-content>
       <page-footer />
     </a-layout>
@@ -110,6 +110,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const selectedKeys = ref<string[]>(["1"]);
 const collapsed = ref<boolean>(false);
+const key = ref<number>(1);
 
 const doTrigger = () => {
   collapsed.value = !collapsed.value;
@@ -140,7 +141,7 @@ const loadData = async (id: number) => {
 const doLoginOut = async () => {
   await userLogoutUsingPOST();
   userVO.value = {};
-  router.push("/user/login");
+  router.push("/userManager/login");
 };
 
 loadData(1);

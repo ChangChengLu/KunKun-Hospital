@@ -2,7 +2,7 @@
   <LoginLayout>
     <div class="top">
       <div class="header">
-        <img alt="logo" class="logo" src="../../assets/logo.png" />
+        <img alt="logo" class="logo" src="../../assets/iKun.jpg" />
         <span class="title">{{ systemName }}</span>
       </div>
       <div class="desc">
@@ -31,12 +31,7 @@
                 showIcon
                 style="margin-bottom: 24px"
               />
-              <a-form-item
-                name="username"
-                :rules="[
-                  { required: true, message: 'Please input your username!' },
-                ]"
-              >
+              <a-form-item name="username">
                 <a-input
                   v-model:value="userLogin.userAccount"
                   autocomplete="autocomplete"
@@ -48,12 +43,7 @@
                   </template>
                 </a-input>
               </a-form-item>
-              <a-form-item
-                name="password"
-                :rules="[
-                  { required: true, message: 'Please input your password!' },
-                ]"
-              >
+              <a-form-item name="password">
                 <a-input
                   v-model:value="userLogin.userPassword"
                   size="large"

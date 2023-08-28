@@ -1,11 +1,5 @@
 <template>
   <div>
-    <admin-layout></admin-layout>
+    <router-view />
   </div>
 </template>
-<script>
-import AdminLayout from "@/layouts/AdminLayout";
-export default {
-  components: { AdminLayout },
-};
-</script>

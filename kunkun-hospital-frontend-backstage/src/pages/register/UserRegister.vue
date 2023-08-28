@@ -3,7 +3,7 @@
     <div class="top">
       <div class="header">
         <img alt="logo" class="logo" src="../../assets/logo.png" />
-        <span class="title">仙医馆籍</span>
+        <span class="title">馆籍注册</span>
       </div>
       <div class="desc">
         <p>九重天子寰中贵，五等诸侯门外尊。</p>
@@ -19,15 +19,7 @@
         >
           <div style="margin-top: 40px">
             <a-form-item>
-              <a-form-item
-                name="userAccount"
-                :rules="[
-                  {
-                    required: true,
-                    message: 'Please input your user account!',
-                  },
-                ]"
-              >
+              <a-form-item name="userAccount">
                 <a-input
                   v-model:value="userRegister.userAccount"
                   autocomplete="autocomplete"
@@ -39,12 +31,7 @@
                   </template>
                 </a-input>
               </a-form-item>
-              <a-form-item
-                name="password"
-                :rules="[
-                  { required: true, message: 'Please input your password!' },
-                ]"
-              >
+              <a-form-item name="password">
                 <a-input
                   v-model:value="userRegister.userPassword"
                   size="large"
@@ -58,15 +45,7 @@
                   </template>
                 </a-input>
               </a-form-item>
-              <a-form-item
-                name="checkPassword"
-                :rules="[
-                  {
-                    required: true,
-                    message: 'Please input your checked password!',
-                  },
-                ]"
-              >
+              <a-form-item name="checkPassword">
                 <a-input
                   v-model:value="userRegister.checkPassword"
                   size="large"
@@ -128,7 +107,7 @@ const handleSubmit = async (userRegisterRequest: API.UserRegisterRequest) => {
   await userRegisterUsingPOST(userRegisterRequest).then((res) => {
     loginLoading.value = false;
     if (res) {
-      router.push("/user/login");
+      router.push("/userManager/login");
     }
   });
 };

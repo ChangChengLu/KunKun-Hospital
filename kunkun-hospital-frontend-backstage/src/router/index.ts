@@ -1,6 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import UserLogin from "../pages/login/UserLogin.vue";
 import UserRegister from "../pages/register/UserRegister.vue";
+import UserAdd from "../pages/userManager/UserAdd.vue";
+import AdminLayout from "../layouts/AdminLayout.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -20,9 +22,17 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/user/manage",
-    name: "userManager",
-    component: UserRegister,
+    path: "/",
+    name: "adminLayout",
+    component: AdminLayout,
+    meta: {
+      isLogin: true,
+    },
+  },
+  {
+    path: "/user/manage/add",
+    name: "userAdd",
+    component: UserAdd,
     meta: {
       isLogin: true,
     },

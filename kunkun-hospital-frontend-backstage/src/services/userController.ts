@@ -3,13 +3,13 @@ import myAxios from "@/plugins/MyAxios";
 export async function userRegisterUsingPOST(
   body: API.UserRegisterRequest
 ): Promise<API.BaseResponseBoolean> {
-  return myAxios.post("/user/register", body);
+  return myAxios.post("/user/manager/register", body);
 }
 
 export async function userLoginUsingPOST(
   body: API.UserLoginRequest
 ): Promise<API.BaseResponseUserLoginVO> {
-  return myAxios.post("/user/login", body);
+  return myAxios.post("/user/manager/login", body);
 }
 
 export async function addUserUsingPOST(
